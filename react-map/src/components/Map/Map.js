@@ -13,12 +13,14 @@ class Map extends Component {
       this.state = {
         lng: 5,
         lat: 34,
-        zoom: 1.5
+        zoom: 1.5,
+        features: props.features
       };
+      console.log(this.state.features);
   }
 
   componentDidMount() {
-    const { lng, lat, zoom } = this.state;
+    const { lng, lat, zoom, features } = this.state;
 
     var popup = new mapboxgl.Popup({
         closeButton: false,
@@ -78,28 +80,7 @@ class Map extends Component {
           "type": "geojson",
           "data": {
               "type": "FeatureCollection",
-              "features": [{
-                  "type": "Feature",
-                  "geometry": {
-                      "type": "Point",
-                      "coordinates": [-77.03238901390978, 38.913188059745586]
-                  },
-                  "properties": {
-                      "title": "Mapbox DC",
-                      "icon": "fire-station",
-                      "description" : "<strong>DC!"
-                  }
-              }, {
-                  "type": "Feature",
-                  "geometry": {
-                      "type": "Point",
-                      "coordinates": [-122.414, 37.776]
-                  },
-                  "properties": {
-                      "title": "Mapbox SF",
-                      "icon": "campsite"
-                  }
-              }]
+              "features": features 
             }
         },
         "layout": {
@@ -114,15 +95,13 @@ class Map extends Component {
 
   } 
 
-
-
   render() {
-    const { lng, lat, zoom } = this.state;
+    const { lng, lat, zoom, features } = this.state;
 
     return (
       <div className="Map">
         <div ref={el => this.mapContainer = el} 
-             className="map absolute top right left bottom"
+             className="map"
              id="map" />
       </div>
     );
