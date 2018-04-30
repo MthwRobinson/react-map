@@ -1,3 +1,4 @@
 .App {
-  background: gray;
+  background: lightgray;
+  overflow: hidden;
 }
